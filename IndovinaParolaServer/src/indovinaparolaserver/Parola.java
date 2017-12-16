@@ -48,4 +48,7 @@ public class Parola {
     public String getParola(){
         return parola;
     }
+    public String getParolaIncognita(){
+        return new String(parolaIndovinata);
+    }
 }
