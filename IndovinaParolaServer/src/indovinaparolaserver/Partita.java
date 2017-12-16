@@ -46,9 +46,27 @@ public class Partita extends Thread {
             }
         }while(!inClient.startsWith("NomeGiocatore: "));
         nomeGiocatore=inClient.substring(15);
+        outputClient.println(parola.getParolaIncognita());
         do{
-            //Fai la partita lato server;
+            try {
+                char letteraInput = inputClient.readLine().charAt(0);
+                parola.checkLettera(letteraInput);
+            } catch (IOException ex) {
+                Logger.getLogger(Partita.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (parola.isParolaIndovinata()){
+                outputClient.println("Hai Vinto!");
+                outputClient.println("Parola: "+parola.getParolaIncognita());
+            }else{
+                outputClient.println("Ritenta!");
+                outputClient.println("Lettere Indovinate: "+parola.getParolaIncognita());
+            }
         }while(!parola.isParolaIndovinata());
+        try {
+            socketClient.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Partita.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     
