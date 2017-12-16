@@ -18,12 +18,15 @@ public class IndovinaParolaServer {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        try {
-            ServerSocket server = new ServerSocket(5000);
-            Partita partita = new Partita(server.accept());
-        } catch (IOException ex) {
-            Logger.getLogger(IndovinaParolaServer.class.getName()).log(Level.SEVERE, null, ex);
+    public static void main(String[] args) throws IOException {
+        ServerSocket server = new ServerSocket(5000);
+        while (true){
+                try {
+                Partita partita = new Partita(server.accept());
+                partita.start();
+            } catch (IOException ex) {
+                Logger.getLogger(IndovinaParolaServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }

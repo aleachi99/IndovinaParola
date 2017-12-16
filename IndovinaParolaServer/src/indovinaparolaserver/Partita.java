@@ -37,6 +37,7 @@ public class Partita extends Thread {
             Logger.getLogger(Partita.class.getName()).log(Level.SEVERE, null, ex);
         }
         outputClient.println("Giocatore: ");
+        System.out.println("Giocatore: ");
         String inClient="";
         do{
             try {
@@ -46,6 +47,7 @@ public class Partita extends Thread {
             }
         }while(!inClient.startsWith("NomeGiocatore: "));
         nomeGiocatore=inClient.substring(15);
+        outputClient.println("Start!");
         outputClient.println(parola.getParolaIncognita());
         do{
             try {
