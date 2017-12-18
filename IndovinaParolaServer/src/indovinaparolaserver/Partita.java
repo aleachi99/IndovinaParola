@@ -48,25 +48,25 @@ public class Partita extends Thread {
                 Logger.getLogger(Partita.class.getName()).log(Level.SEVERE, null, ex);
             }
         }while(!inClient.startsWith("NomeGiocatore: "));
-        nomeGiocatore=inClient.substring(15);
-        db.inserisciPartita(nomeGiocatore, parola.getParola());
-        outputClient.println("Start!");
-        outputClient.println(parola.getParolaIncognita());
-        do{
-            try {
-                char letteraInput = inputClient.readLine().charAt(0);
-                parola.checkLettera(letteraInput);
-            } catch (IOException ex) {
-                Logger.getLogger(Partita.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if (parola.isParolaIndovinata()){
-                outputClient.println("Hai Vinto!");
-                outputClient.println("Parola: "+parola.getParolaIncognita());
-            }else{
-                outputClient.println("Ritenta!");
-                outputClient.println("Lettere Indovinate: "+parola.getParolaIncognita());
-            }
-        }while(!parola.isParolaIndovinata());
+            nomeGiocatore=inClient.substring(15);
+            db.inserisciPartita(nomeGiocatore, parola.getParola());
+            outputClient.println("Start!");
+            outputClient.println(parola.getParolaIncognita());
+            do{
+                try {
+                    char letteraInput = inputClient.readLine().charAt(0);
+                    parola.checkLettera(letteraInput);
+                } catch (IOException ex) {
+                    Logger.getLogger(Partita.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if (parola.isParolaIndovinata()){
+                    outputClient.println("Hai Vinto!");
+                    outputClient.println("Parola: "+parola.getParolaIncognita());
+                }else{
+                    outputClient.println("Ritenta!");
+                    outputClient.println("Lettere Indovinate: "+parola.getParolaIncognita());
+                }
+            }while(!parola.isParolaIndovinata());
         try {
             socketClient.close();
         } catch (IOException ex) {
