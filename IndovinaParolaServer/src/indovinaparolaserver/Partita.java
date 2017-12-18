@@ -20,9 +20,11 @@ public class Partita extends Thread {
     private BufferedReader inputClient;
     private String nomeGiocatore;
     private Parola parola;
+    private Database db;
     public Partita(Socket s){
         socketClient=s;
-        parola=new Parola();
+        db = new Database();
+        parola=new Parola(db.getParola());
     }
     @Override
     public void run(){
@@ -47,6 +49,7 @@ public class Partita extends Thread {
             }
         }while(!inClient.startsWith("NomeGiocatore: "));
         nomeGiocatore=inClient.substring(15);
+        db.inserisciPartita(nomeGiocatore, parola.getParola());
         outputClient.println("Start!");
         outputClient.println(parola.getParolaIncognita());
         do{
