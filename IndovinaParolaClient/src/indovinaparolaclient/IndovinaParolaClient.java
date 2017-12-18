@@ -50,6 +50,7 @@ public class IndovinaParolaClient {
             System.out.println(messaggioIngresso);
             System.out.println("Inserisci una lettera");
             String lettera = sc.next();
+            lettera=lettera.toUpperCase();
             outputServer.println(lettera.charAt(0));
             messaggioIngresso=inputServer.readLine();
        }while(messaggioIngresso.equals("Ritenta!"));
