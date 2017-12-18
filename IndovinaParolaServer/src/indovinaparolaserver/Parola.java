@@ -24,6 +24,15 @@ public class Parola {
         System.out.println(parola);
         System.out.println(parolaIndovinata);
     }
+    public Parola(String p){
+        numeroCaratteri=p.length();
+        parola=p.toUpperCase();
+        parolaIndovinata=new char[numeroCaratteri];
+        for (int i=0; i<numeroCaratteri; i++){
+            parolaIndovinata[i]='?';
+        }
+        System.out.println("Parola pescata dal database da indovinare: "+parola);
+    }
     
     public void checkLettera(char lettera){
         boolean checkLettera[]=new boolean[numeroCaratteri];
@@ -35,6 +44,7 @@ public class Parola {
         for (int i=0; i<numeroCaratteri; i++){
              System.out.print(parolaIndovinata[i]);
         }
+        System.out.println();
     }
     public boolean isParolaIndovinata(){
         boolean terminata=true;
