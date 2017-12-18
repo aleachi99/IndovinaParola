@@ -26,9 +26,9 @@ public class IndovinaParolaClient {
     public static void main(String[] args) throws UnknownHostException, IOException {
        Scanner sc = new Scanner(System.in);
        boolean voglioGiocare=false;
-       System.out.println("Inserisci indirizzo ip server:");
+       System.out.println("Inserisci indirizzo ip server: [localhost]");
        String indIP=sc.next();
-       System.out.println("Inserisci porta server:");
+       System.out.println("Inserisci porta server: [5000]");
        int porta=sc.nextInt();
        do{
        Socket clientSocket=new Socket(InetAddress.getByName(indIP), porta);
