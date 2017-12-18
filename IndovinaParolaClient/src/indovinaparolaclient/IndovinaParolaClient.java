@@ -25,10 +25,12 @@ public class IndovinaParolaClient {
      */
     public static void main(String[] args) throws UnknownHostException, IOException {
        Scanner sc = new Scanner(System.in);
+       boolean voglioGiocare=false;
        System.out.println("Inserisci indirizzo ip server:");
        String indIP=sc.next();
        System.out.println("Inserisci porta server:");
        int porta=sc.nextInt();
+       do{
        Socket clientSocket=new Socket(InetAddress.getByName(indIP), porta);
        System.out.println("Connessione Stabilita!");
        BufferedReader inputServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -45,19 +47,28 @@ public class IndovinaParolaClient {
            }
            messaggioIngresso=inputServer.readLine();
        } while(!messaggioIngresso.equals("Start!"));
-       do{
-            messaggioIngresso=inputServer.readLine();
-            System.out.println(messaggioIngresso);
-            System.out.println("Inserisci una lettera");
-            String lettera = sc.next();
-            lettera=lettera.toUpperCase();
-            outputServer.println(lettera.charAt(0));
-            messaggioIngresso=inputServer.readLine();
-       }while(messaggioIngresso.equals("Ritenta!"));
-       System.out.println("Hai indovinato la parola");
-       messaggioIngresso=inputServer.readLine();
-       System.out.println(messaggioIngresso);
-       clientSocket.close();
+       
+        do{
+             messaggioIngresso=inputServer.readLine();
+             System.out.println(messaggioIngresso);
+             System.out.println("Inserisci una lettera");
+             String lettera = sc.next();
+             lettera=lettera.toUpperCase();
+             outputServer.println(lettera.charAt(0));
+             messaggioIngresso=inputServer.readLine();
+        }while(messaggioIngresso.equals("Ritenta!"));
+        System.out.println("Hai indovinato la parola");
+        messaggioIngresso=inputServer.readLine();
+        System.out.println(messaggioIngresso);
+        clientSocket.close();
+        System.out.println("Vuoi iniziare una nuova parita?[Si/No]");
+        String risposta=sc.next().toLowerCase();
+        if(risposta.equals("si")){
+             voglioGiocare=true;
+        }else{
+             voglioGiocare=false;
+        }
+        }while(voglioGiocare);
     }
     
 }
