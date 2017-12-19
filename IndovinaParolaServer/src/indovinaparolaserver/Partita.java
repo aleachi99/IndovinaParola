@@ -29,25 +29,28 @@ public class Partita extends Thread {
     @Override
     public void run(){
         try {
-            outputClient=new PrintStream(socketClient.getOutputStream());
-        } catch (IOException ex) {
-            Logger.getLogger(Partita.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            inputClient=new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
-        } catch (IOException ex) {
-            Logger.getLogger(Partita.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        outputClient.println("Giocatore: ");
-        System.out.println("Giocatore: ");
-        String inClient="";
-        do{
             try {
-                inClient = inputClient.readLine();
+                outputClient=new PrintStream(socketClient.getOutputStream());
             } catch (IOException ex) {
                 Logger.getLogger(Partita.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }while(!inClient.startsWith("NomeGiocatore: "));
+            try {
+                inputClient=new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
+            } catch (IOException ex) {
+                Logger.getLogger(Partita.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (inputClient.readLine().equals("NuovaPartita")){
+                System.out.println("inizio partita");
+            outputClient.println("Giocatore: ");
+            System.out.println("Giocatore: ");
+            String inClient="";
+            do{
+                try {
+                    inClient = inputClient.readLine();
+                } catch (IOException ex) {
+                    Logger.getLogger(Partita.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }while(!inClient.startsWith("NomeGiocatore: "));
             nomeGiocatore=inClient.substring(15);
             db.inserisciPartita(nomeGiocatore, parola.getParola());
             outputClient.println("Start!");
@@ -67,9 +70,15 @@ public class Partita extends Thread {
                     outputClient.println("Lettere Indovinate: "+parola.getParolaIncognita());
                 }
             }while(!parola.isParolaIndovinata());
-        try {
-            socketClient.close();
-        } catch (IOException ex) {
+            try {
+                socketClient.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Partita.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else{
+                System.out.println("messaggio non valido in questo contesto");
+            }
+        }catch (IOException ex) {
             Logger.getLogger(Partita.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

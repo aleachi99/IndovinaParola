@@ -24,7 +24,7 @@ public class Database {
         try {
             // Setup the connection with the DB
             con = DriverManager
-                    .getConnection("jdbc:mysql://10.1.100.8/tecnologia?"
+                    .getConnection("jdbc:mysql://localhost/tecnologia?"
                             + "user=tecnologia&password=password");
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);

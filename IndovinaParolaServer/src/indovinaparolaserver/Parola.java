@@ -12,7 +12,7 @@ package indovinaparolaserver;
 public class Parola {
     private String parola="";
     private char[] parolaIndovinata;
-    int numeroCaratteri;
+    private int numeroCaratteri;
     public Parola(){
         numeroCaratteri=(int)(Math.random()*10%4)+3;
         parolaIndovinata=new char[numeroCaratteri];
