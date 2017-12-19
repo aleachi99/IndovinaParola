@@ -35,8 +35,10 @@ public class IndovinaParolaClient {
        System.out.println("Connessione Stabilita!");
        BufferedReader inputServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
        PrintStream outputServer = new PrintStream(clientSocket.getOutputStream());
-       String messaggioIngresso = inputServer.readLine();
+       String messaggioIngresso;
        do{
+           outputServer.println("NuovaPartita");
+            messaggioIngresso = inputServer.readLine();
            if (messaggioIngresso.equals("Giocatore: ")){
                 System.out.println("Inserisci nome Giocatore: ");
                 String nomeGiocatore = sc.next();
